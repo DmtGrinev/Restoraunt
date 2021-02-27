@@ -7,11 +7,11 @@
 
 import UIKit
 
-class RestMenuCollectionView: UIViewController {
+class RestMenuViewController: UIViewController {
     
     var collectionView: UICollectionView!
     
-    private lazy var barButtonItem: UIBarButtonItem = {
+    private lazy var leftBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(barButtonItemTapped))
     }()
     
@@ -26,14 +26,9 @@ class RestMenuCollectionView: UIViewController {
     @objc private func barButtonItemTapped() {
         print(#function)
     }
-    
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = barButtonItem
-        barButtonItem.tintColor = .black
-    }
 }
 
-extension RestMenuCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RestMenuViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // print(photosObject.count)
         return 15 //photosObject.count
@@ -51,7 +46,7 @@ extension RestMenuCollectionView: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension RestMenuCollectionView: UICollectionViewDelegateFlowLayout {
+extension RestMenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -63,7 +58,7 @@ extension RestMenuCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-private extension RestMenuCollectionView {
+private extension RestMenuViewController {
     func setupCollectionView() {
         self.collectionView =  UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         self.view.addSubview(collectionView)
@@ -75,5 +70,12 @@ private extension RestMenuCollectionView {
         self.collectionView.contentInset = UIEdgeInsets(top: 35, left: 16, bottom: 25, right: 16)
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.estimatedItemSize = .zero
+    }
+}
+
+private extension RestMenuViewController {
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+        leftBarButtonItem.tintColor = .black
     }
 }
