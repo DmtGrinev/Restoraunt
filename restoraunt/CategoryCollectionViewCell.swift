@@ -11,12 +11,19 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     static var reusedId = "CategoryCell"
     
-    var photoImageView: UIImageView = {
+    var categoryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemGreen
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .systemPink
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override var isSelected: Bool {
@@ -27,12 +34,13 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        photoImageView.image = nil
+        categoryImageView.image = nil
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-       setupPhotoImageView()
+        setupPhotoImageView()
+        setupCategoryLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -40,11 +48,19 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func setupPhotoImageView() {
-        addSubview(photoImageView)
-        photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        photoImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        addSubview(categoryImageView)
+        categoryImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        categoryImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        categoryImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        categoryImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30).isActive = true
+    }
+    
+    func setupCategoryLabel() {
+        addSubview(categoryLabel)
+        categoryLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        categoryLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: self.categoryImageView.bottomAnchor).isActive = true
+        categoryLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
 }

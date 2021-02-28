@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol RestMenuViewControllerDelegate {
+    
+    func toggleCategory()
+}
+
 class RestMenuViewController: UIViewController {
     
     var collectionView: UICollectionView!
+    
+    var delagate: RestMenuViewControllerDelegate?
     
     private lazy var leftBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(barButtonItemTapped))
@@ -25,6 +32,7 @@ class RestMenuViewController: UIViewController {
     
     @objc private func barButtonItemTapped() {
         print(#function)
+        delagate?.toggleCategory()
     }
 }
 
@@ -38,8 +46,8 @@ extension RestMenuViewController: UICollectionViewDelegate, UICollectionViewData
         cell.backgroundColor = .systemYellow
         
         // TODO: add text from photos description & photo ([indexPath.item])
-        cell.photoImageView.image = UIImage(named: "image")
-        // cell.photoLabel.text =
+        cell.categoryImageView.image = UIImage(named: "image")
+        cell.categoryLabel.text = " Дима молодец :)"
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         return cell
