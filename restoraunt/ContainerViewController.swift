@@ -13,10 +13,10 @@ class ContainerViewController: UIViewController, RestMenuViewControllerDelegate 
     var controller: UIViewController!
     var navigation: UINavigationController!
     var isMove = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  configureLeftMenuViewController()
+          configureLeftMenuViewController()
         configureMainNavigationbar()
     }
     
@@ -31,7 +31,7 @@ class ContainerViewController: UIViewController, RestMenuViewControllerDelegate 
     
     func configureLeftMenuViewController() {
         if leftMenuViewController == nil {
-          leftMenuViewController = LeftMenuViewController()
+            leftMenuViewController = LeftMenuViewController()
             view.insertSubview(leftMenuViewController.view, at: 0)
             addChild(leftMenuViewController)
             print("sadasfs")
@@ -40,38 +40,36 @@ class ContainerViewController: UIViewController, RestMenuViewControllerDelegate 
     
     func configureMainNavigationbar() {
         let mainNavigationBar = MainNavigationbar()
-    //    mainNavigationBar.delagate = self
+        //    mainNavigationBar.delagate = self
         navigation = mainNavigationBar
         view.addSubview(navigation.view)
         addChild(navigation)
     }
     
     func showLeftMenuViewController(shouldMove: Bool) {
-//        if shouldMove {
-//            UIView.animate(withDuration: 0.5,
-//                           delay: 0,
-//                           usingSpringWithDamping: 0.8,
-//                           initialSpringVelocity: 0,
-//                           options: .curveEaseInOut) {
-//                self.controller.view.frame.origin.x = self.controller.view.frame.width - 140
-//            } completion: { (finished) in
-//                <#code#>
-//            }
-//
-//        } else {
-//            UIView.animate(withDuration: 0.5,
-//                           delay: 0,
-//                           usingSpringWithDamping: 0.8,
-//                           initialSpringVelocity: 0,
-//                           options: .curveEaseInOut) {
-//                self.controller.view.frame.origin.x = 0
-//            } completion: { (finished) in
-//                <#code#>
-//            }
-//        }
+        if shouldMove {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut) {
+                self.controller.view.frame.origin.x = self.controller.view.frame.width - 140
+            } completion: { (finished) in
+            }
+            
+        } else {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut) {
+                self.controller.view.frame.origin.x = 0
+            } completion: { (finished) in
+            }
+        }
     }
     
-  //  MARK: - RestMenuViewControllerDelegate
+    //  MARK: - RestMenuViewControllerDelegate
     func toggleCategory() {
         configureLeftMenuViewController()
         isMove = !isMove

@@ -35,11 +35,12 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         categoryImageView.image = nil
+        categoryLabel.text = nil
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupPhotoImageView()
+        setupCategoryImageView()
         setupCategoryLabel()
     }
     
@@ -47,7 +48,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupPhotoImageView() {
+    func setupCategoryImageView() {
         addSubview(categoryImageView)
         categoryImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         categoryImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
