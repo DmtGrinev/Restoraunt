@@ -9,14 +9,22 @@ import UIKit
 
 class CategoryMenuViewController: UIViewController {
     
-    var tableView: UITableView!
+    var tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        self.updateLayout(with: self.view.frame.size)
+        setupTableView()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.updateLayout(with: size)
+        }, completion: nil)
+    }
+    
+   
     
     /*
      // MARK: - Navigation
@@ -32,11 +40,18 @@ class CategoryMenuViewController: UIViewController {
 
 //extension CategoryMenuViewController {}
 //
-//private extension CategoryMenuViewController {
-//    func setupTableView() {
-//        self.tableView = UITableView(
-//    }
-//}
+private extension CategoryMenuViewController {
+    private func updateLayout(with size: CGSize) {
+          self.tableView.frame = CGRect.init(origin: .zero, size: size)
+      }
+    func setupTableView() {
+        self.view.addSubview(tableView)
+        self.tableView.register(CategoryMenuTableViewCell.self, forCellReuseIdentifier: CategoryMenuTableViewCell.reusedId)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+    }
+  
+}
 
 extension CategoryMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

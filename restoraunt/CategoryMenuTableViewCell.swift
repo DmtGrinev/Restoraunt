@@ -47,6 +47,15 @@ class CategoryMenuTableViewCell: UITableViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dishImageView.image = nil
+        titleDishLabel.text = nil
+        descriptionDishLabel.text = nil
+        priceDishLabel.text = nil
+        weightDishLabel.text = nil
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
