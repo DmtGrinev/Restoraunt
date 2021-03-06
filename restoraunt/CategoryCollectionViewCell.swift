@@ -28,6 +28,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
+           // self.categoryImageView.pushViewController(CategoryMenuViewController, animated: true)
             // добавить переход 
         }
     }

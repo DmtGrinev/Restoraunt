@@ -6,33 +6,32 @@
 //
 
 import UIKit
+import SideMenu
 
-protocol RestMenuViewControllerDelegate {
-    
-    func toggleCategory()
-}
 
 class RestMenuViewController: UIViewController {
     
     var collectionView: UICollectionView!
+    var menu: SideMenuNavigationController?
     
-    var delagate: RestMenuViewControllerDelegate?
-    
-    private lazy var leftBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(barButtonItemTapped))
-    }()
+    //    private lazy var leftBarButtonItem: UIBarButtonItem = {
+    //        return UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(barButtonItemTapped))
+    //    }()
     
     private let itemsPerRow: CGFloat = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupNavigationBar()
+        menu = SideMenuNavigationController(rootViewController: LeftMenuViewController())
+        menu?.leftSide = true
+        menu?.setNavigationBarHidden(true, animated: false)
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
     }
     
-    @objc private func barButtonItemTapped() {
-        print(#function)
-        delagate?.toggleCategory()
+    @IBAction func tapMenu(_ sender: UIBarButtonItem) {
+        present(menu!, animated: true, completion: nil)
     }
 }
 
@@ -78,12 +77,5 @@ private extension RestMenuViewController {
         self.collectionView.contentInset = UIEdgeInsets(top: 35, left: 16, bottom: 25, right: 16)
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.estimatedItemSize = .zero
-    }
-}
-
-private extension RestMenuViewController {
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = leftBarButtonItem
-        leftBarButtonItem.tintColor = .black
     }
 }
